@@ -48,6 +48,7 @@ class Product
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updateAt = null;
+    
     #[ORM\PreUpdate]
     public function setDateUpdate()
     {
@@ -59,6 +60,16 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
+    #[ORM\PrePersist]
+    public function prePersist(){
+
+
+    }
+    #[ORM\PreUpdate]
+    public function preUpdate(){
+
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

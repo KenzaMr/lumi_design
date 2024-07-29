@@ -1,10 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
-<h1>Accueil</h1>
-{% for item in items %}
-    
-{% endfor %}
+	<h1>Accueil</h1>
+	<table class='table tble-striped'>
+    <tr>
+    <th>Nom</th>
+    <th>Prix</th>
+    <th>Stock</th>
+    <th>Description</th>
+    <th>Image</th>
+    <th>Date de création</th></tr>
+		{% for produit in poduits %}
+			<tr>
+            <td>{{produit.name}}</td>
+            <td>{{produit.price}}</td>
+            <td>{{produit.stock}}</td>
+            <td>{{produit.description}}</td>
+            <td><img src={{produit.image}} alt=""></td>
+            <td>{{produit.createdAt|date("m/d/y")}}</td></tr>
+		{% endfor %}
+	</table>
+
 {% endblock %}
