@@ -9,7 +9,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 
-class ProductFixtures extends Fixture implements DependentFixtureInterface
+class ProductFixtures2 extends Fixture implements DependentFixtureInterface
 {
     private $faker;
 
@@ -39,7 +39,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            CategoryFixtures::class,
+            CategoryFixtures2::class,
             
         ];
     }
