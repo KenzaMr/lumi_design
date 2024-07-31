@@ -25,6 +25,13 @@ class ProductRepository extends ServiceEntityRepository
     {
         return $this->paginator->paginate($this->createQueryBuilder('p'), $page, 5);
     }
+    public function paginateProductOrderByUpdateAt(int $page): PaginationInterface
+    {
+        return $this->paginator->paginate($this->createQueryBuilder('p')
+        ->orderBy('p.updateAt','DESC'), 
+        $page,
+        5);
+    }
     public function findWithCategory(string $slug): ?Product
     {
         return $this->createQueryBuilder('p')

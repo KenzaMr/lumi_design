@@ -8,10 +8,14 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[UniqueEntity('name')]
 #[HasLifecycleCallbacks]
+#[Vich\Uploadable()]
 class Product
 {
     #[ORM\Id]
@@ -19,22 +23,30 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "Le champ {{ label }} est nécessaire")]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
+    #[Assert\NotBlank(message: "Le champ {{ label }} est nécessaire")]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+
+    #[Vich\UploadableField(mapping: 'products',fileNameProperty:'image')]
+    private ?File $AddImage=null;
+
+    #[Assert\NotBlank(message: "Le champ {{ label }} est nécessaire")]
     #[ORM\Column(type: Types::DECIMAL, precision: 7, scale: 2, nullable: true)]
     private ?string $price = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero()]
     private ?int $stock = null;
 
     #[ORM\Column]
@@ -48,7 +60,7 @@ class Product
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updateAt = null;
-    
+
     #[ORM\PreUpdate]
     public function setDateUpdate()
     {
@@ -61,15 +73,14 @@ class Product
     private ?Category $category = null;
 
     #[ORM\PrePersist]
-    public function prePersist(){
-
-
+    public function prePersist()
+    {
     }
     #[ORM\PreUpdate]
-    public function preUpdate(){
-
+    public function preUpdate()
+    {
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -179,6 +190,26 @@ class Product
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of AddImage
+     */ 
+    public function getAddImage()
+    {
+        return $this->AddImage;
+    }
+
+    /**
+     * Set the value of AddImage
+     *
+     * @return  self
+     */ 
+    public function setAddImage($AddImage)
+    {
+        $this->AddImage = $AddImage;
 
         return $this;
     }
