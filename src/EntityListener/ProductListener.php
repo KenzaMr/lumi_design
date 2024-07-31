@@ -1,12 +1,15 @@
 <?php
 
-namespace App\EventListener;
+namespace App\EntityListener;
 
 use App\Entity\Product;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class SluggerListener
+#[AsEntityListener(event:'prePersist',entity:Product::class)]
+#[AsEntityListener(event:'preUpdate', entity:Product::class)]
+class ProductListener
 {
     private $slugger;
     public function __construct(SluggerInterface $slugger)

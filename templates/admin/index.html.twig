@@ -4,6 +4,7 @@
 
 {% block body %}
 	<h1>Accueil</h1>
+  
 	<table class='table tble-striped'>
     <tr>
     <th>Id</th>
@@ -18,8 +19,8 @@
             <td>{{produit.name}}</td>
             <td>{{produit.createdAt|date("m/d/y")}}</td>
             <td>{{produit.description}}</td>
-            <td><a href="">Modifier</a></td>
-            <td><a href="">Supprimer</a></td>
+            <td><a href="" class="btn btn-primary">Modifier</a></td>
+            <td><a href=""class="btn btn-danger">Supprimer</a></td>
             </tr>
 		{% endfor %}
 	</table>

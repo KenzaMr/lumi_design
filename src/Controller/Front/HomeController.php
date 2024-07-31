@@ -2,6 +2,7 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,12 +25,12 @@ class HomeController extends AbstractController
             ]
         );
     }
-    #[Route('/detail/{id}', name: 'new')]
-    public function new($id,ProductRepository $repository)
+    #[Route('/detail/{slug}', name: 'show',methods:['GET'])]
+    public function show(string $slug, ProductRepository $repository)
     {
-        $detail=$repository->find($id);
-        return $this->render('front/home/detail.html.twig',[
-            'produit'=>$detail
+        $product=$repository->findWithCategory($slug);
+        return $this->render('front/home/show.html.twig',[
+            'produit'=>$product
         ]);
     }
 }

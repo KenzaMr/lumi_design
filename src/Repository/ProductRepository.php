@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,7 +25,15 @@ class ProductRepository extends ServiceEntityRepository
     {
         return $this->paginator->paginate($this->createQueryBuilder('p'), $page, 5);
     }
-
+    public function findWithCategory(string $slug): ?Product
+    {
+        return $this->createQueryBuilder('p')
+        ->leftJoin('p.category','c')
+        ->andWhere('p.slug= :pull')
+        ->setParameter('pull',$slug)
+        ->getQuery()
+        ->getOneOrNullResult();
+    }
     //    /**
     //     * @return Product[] Returns an array of Product objects
     //     */
