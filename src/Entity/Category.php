@@ -7,9 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[UniqueEntity('name')]
+#[Vich\Uploadable()]
 class Category
 {
     #[ORM\Id]
@@ -23,7 +26,7 @@ class Category
     /**
      * @var Collection<int, Product>
      */
-    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category')]
+    // #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category',cascade:['remove'])]
     private Collection $products;
 
     public function __construct()

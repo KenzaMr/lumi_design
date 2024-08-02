@@ -1,0 +1,15 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}
+Modification Cat
+{% endblock %}
+{% block body %}
+<main>
+<h1>Modicafation d'une categorie</h1>
+{{form_start(formulaire_edit)}}
+{{form_rest(formulaire_edit)}}
+<input type="submit" value="Je modifie ma caté">
+{{form_end(formulaire_edit)}}
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Detail
+{% endblock %}
+{% block body %}
+{% if produit is not null %}
+<h1>{{produit.name}}</h1>
+<div>
+<p>Description: {{produit.description}}</p>
+<p>Stock disponible: {{produit.stock}}</p>
+<p>Categorie: {{produit.category.name}}</p>
+</div>
+{% endif %}
+
+
+{% endblock %}

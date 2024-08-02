@@ -32,12 +32,12 @@ final class ProductFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'category' => CategoryFactory::new(),
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'name' => 'produit'. self::faker()->numberBetween(0,10),
             'slug' => self::faker()->text(255),
             'stock' => self::faker()->numberBetween(0,100),
-            'price'=>self::faker()->randomNumber()
+            'price'=>self::faker()->randomNumber(),
+            'category' => CategoryFactory::new()
         ];
     }
 
@@ -47,7 +47,7 @@ final class ProductFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Product $product): void {})
+            ->afterInstantiate(function(Product $product): void {})
         ;
     }
 }

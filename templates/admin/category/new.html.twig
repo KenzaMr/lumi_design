@@ -1,0 +1,15 @@
+{% extends 'admin/base.html.twig' %}
+{% block title %}
+Création Cat
+{% endblock %}
+{% block body %}
+<main>
+<h1>Création d'une categorie</h1>
+{{form_start(formulaire_cate)}}
+{{form_rest(formulaire_cate)}}
+<input type="submit" value="Je crée ma caté">
+{{form_end(formulaire_cate)}}
+
+</main>
+
+{% endblock %}

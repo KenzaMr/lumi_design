@@ -10,10 +10,11 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Cascade;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-#[UniqueEntity('name')]
+#[UniqueEntity(fields:['name','slug'])]
 #[HasLifecycleCallbacks]
 #[Vich\Uploadable()]
 class Product
@@ -23,8 +24,8 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank(message: "Le champ {{ label }} est nécessaire")]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()] 
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
@@ -37,7 +38,7 @@ class Product
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-
+    #[Assert\Image()]
     #[Vich\UploadableField(mapping: 'products',fileNameProperty:'image')]
     private ?File $AddImage=null;
 
@@ -69,7 +70,7 @@ class Product
 
     #[ORM\ManyToOne(inversedBy: 'products')]
 
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(onDelete:'SET NULL')]
     private ?Category $category = null;
 
     #[ORM\PrePersist]

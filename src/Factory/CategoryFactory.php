@@ -42,7 +42,7 @@ final class CategoryFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Category $category): void {})
+            ->afterInstantiate(function(Category $category): void {})
         ;
     }
 }

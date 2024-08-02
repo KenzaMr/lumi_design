@@ -7,8 +7,8 @@ use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[AsEntityListener(event:'prePersist',entity:Product::class)]
-#[AsEntityListener(event:'preUpdate', entity:Product::class)]
+#[AsEntityListener(event: 'prePersist', entity: Product::class)]
+#[AsEntityListener(event: 'preUpdate',entity: Product::class)]
 class ProductListener
 {
     private $slugger;
@@ -16,20 +16,20 @@ class ProductListener
     {
         $this->slugger = $slugger;
     }
-    public function prePersist(LifecycleEventArgs $args)
+
+    public function prePersist(Product $product, LifecycleEventArgs $args)
     {
-        $this->generateSlug($args);
+        $this->generateSlug($product);
     }
-    public function preUpdate(LifecycleEventArgs $args)
+
+    public function preUpdate(Product $product, LifecycleEventArgs $args)
     {
-        $this->generateSlug($args);
+        $this->generateSlug($product);
     }
-    private function generateSlug($args)
+
+    private function generateSlug($product)
     {
-        $entity = $args->getObject();
-        if (!$entity instanceof Product) {
-            return;
-        }
-        $entity->setSlug($this->slugger->slug($entity->getName())->lower());
+
+        $product->setSlug($this->slugger->slug($product->getName())->lower());
     }
 }

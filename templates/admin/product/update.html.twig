@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	Modification produit
+{% endblock %}
+{% block body %}
+	<main>
+		<h1>Création</h1>
+		{{form_start(formulaire_modif)}}
+		{{form_rest(formulaire_modif)}}
+		<input type="submit" value='Modifier'>
+		{{form_end(formulaire_modif)}}
+
+	</main>
+{% endblock %}
