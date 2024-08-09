@@ -8,6 +8,7 @@
 <div>
 <p>Description: {{produit.description}}</p>
 <p>Stock disponible: {{produit.stock}}</p>
+<a href={{path('front_cart_add',{'id':produit.id})}}>Ajouter au panier</a>
 <p>Categorie: {{produit.category.name}}</p>
 </div>
 {% endif %}

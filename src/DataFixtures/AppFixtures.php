@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Factory\CategoryFactory;
 use App\Factory\ProductFactory;
+use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -22,5 +23,6 @@ class AppFixtures extends Fixture
                 // Ceci va assigner une catégorie aléatoire existante à un produit
             ];
         });
+        UserFactory::createMany(9);
     }
 }

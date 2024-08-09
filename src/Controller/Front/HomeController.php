@@ -33,4 +33,9 @@ class HomeController extends AbstractController
             'produit'=>$product
         ]);
     }
+    #[Route('/conditions-site', name: 'terms')]
+    public function terms(){
+        return $this->render('front/home/terms.html.twig');
+    }
+
 }
